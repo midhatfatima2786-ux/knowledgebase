@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Company Knowledge Base Assistant">
+  <title>Company Knowledge Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">K</div>
+        <div><strong>Knowledge Hub</strong><small>Company Assistant</small></div>
+      </div>
+
+      <button class="new-chat-btn" id="newChatBtn" type="button">＋ New chat</button>
+
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-btn active" id="chatNavBtn" type="button"><span>◉</span> AI Assistant</button>
+        <button class="nav-btn" id="documentsNavBtn" type="button"><span>▤</span> Documents <span class="nav-count" id="documentNavCount">0</span></button>
+        <button class="nav-btn" type="button" disabled title="Settings are available in a future integration"><span>⚙</span> Settings</button>
+      </nav>
+
+      <div class="sidebar-label" id="historyLabel">RECENT CHATS</div>
+      <div class="chat-history" id="chatHistory" aria-label="Recent chats"></div>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span>Knowledge assistant</span>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="menuBtn" type="button" aria-label="Toggle menu">☰</button>
+        <div class="topbar-title">
+          <strong id="pageTitle">Company Knowledge Assistant</strong>
+          <span class="online-label" id="pageSubtitle">● Ready to help</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="refreshDocumentsBtn" type="button" title="Refresh documents" aria-label="Refresh documents" hidden>↻</button>
+          <button class="icon-btn" id="clearBtn" type="button" title="Clear current chat" aria-label="Clear current chat">⌫</button>
+        </div>
+      </header>
+
+      <section class="view chat-view" id="chatView">
+        <section class="conversation" id="conversation" aria-live="polite">
+          <div class="welcome" id="welcome">
+            <div class="welcome-icon">✦</div>
+            <p class="eyebrow">YOUR COMPANY, ONE CONVERSATION AWAY</p>
+            <h1>How can I help you today?</h1>
+            <p class="welcome-copy">Ask questions about company policies, products, services, and internal documents.</p>
+            <div class="suggestions">
+              <button class="suggestion" type="button" data-question="What is the company's leave policy?"><span>📄</span><span><b>Leave policy</b><small>Understand leave rules and process</small></span><span>↗</span></button>
+              <button class="suggestion" type="button" data-question="Give me an overview of the company."><span>🏢</span><span><b>Company overview</b><small>Learn about the company</small></span><span>↗</span></button>
+              <button class="suggestion" type="button" data-question="What products and services does the company offer?"><span>📦</span><span><b>Products and services</b><small>Explore available offerings</small></span><span>↗</span></button>
+              <button class="suggestion" type="button" data-question="How can a customer request support?"><span>💬</span><span><b>Customer support</b><small>Find help with common issues</small></span><span>↗</span></button>
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+        </section>
+
+        <section class="composer-wrap">
+          <form class="composer" id="chatForm">
+            <textarea id="messageInput" rows="1" placeholder="Message your company assistant..." aria-label="Your message" required></textarea>
+            <button class="send-btn" id="sendBtn" type="submit" aria-label="Send message">➤</button>
+          </form>
+          <p class="disclaimer">AI-generated responses can be inaccurate. Verify important company decisions with the relevant team.</p>
+        </section>
+      </section>
+
+      <section class="view documents-view" id="documentsView" hidden>
+        <div class="documents-heading">
+          <div>
+            <p class="eyebrow">COMPANY KNOWLEDGE LIBRARY</p>
+            <h1>Documents</h1>
+            <p class="welcome-copy">Browse, search, and preview company documents.</p>
+          </div>
+          <div class="document-total"><strong id="documentCount">0</strong><span>documents</span></div>
+        </div>
+
+        <div class="documents-toolbar">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="documentSearch" type="search" placeholder="Search documents..." autocomplete="off">
+          </label>
+          <button class="secondary-btn" id="refreshDocumentsInlineBtn" type="button">↻ Refresh</button>
+        </div>
+
+        <div class="documents-layout">
+          <div class="document-list-panel">
+            <div class="panel-heading"><strong>All documents</strong><span id="documentListStatus">Not loaded yet</span></div>
+            <div class="document-list" id="documentList">
+              <div class="empty-state"><span>▤</span><strong>No documents loaded</strong><small>Refresh to load documents from your knowledge base.</small></div>
+            </div>
+          </div>
+
+          <div class="preview-panel">
+            <div class="panel-heading"><strong id="previewTitle">Document preview</strong><a id="downloadDocumentBtn" class="download-link" href="#" target="_blank" rel="noopener" hidden>Download ↗</a></div>
+            <div class="preview-empty" id="previewEmpty"><span>PDF</span><strong>Select a document</strong><small>Choose a document from the list to preview it here.</small></div>
+            <iframe id="pdfPreview" title="PDF document preview" hidden></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/documents.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
